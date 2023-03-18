@@ -3,37 +3,16 @@ from flask import make_response, jsonify, request
 from dbhelpers import run_statement
 from check import check
 
-@app.post('/api/user')
-def add_user():
-    keys = ["username", "firstName", "email", "password", "city", "bio"]
-    userName = request.json.get('username')
-    firstName = request.json.get('firstName')
-    email = request.json.get('email')
-    password = request.json.get('password')
-    city = request.json.get('city')
-    bio = request.json.get('bio')
-    results = run_statement("CALL create_client (?,?,?,?,?,?)", [userName, firstName, email, password, city, bio])
+@app.get('/api/pins')
+def get_pins():
+    pins = request.args.get()
+    keys = ["title", "bio", "created_at", "photo", "resource"]
+    # results = run_statement("CALL get_pins(?)", [pins?)
+    results = run_statement("CALL get_pins")
     response = []
     if (type(results) == list):
         for client in results:
             response.append(dict(zip(keys, client)))
-        return make_response(jsonify(results), 200)
+        return make_response(jsonify(response), 200)
     else:
-        return make_response(jsonify(results), 403)
-    
-@app.patch('/api/user')
-def update_user():
-    keys = ["username", "firstName", "email"]
-    id = request.json.get('userId')
-    userName = request.json.get('username')
-    firstName = request.json.get('firstName')
-    email = request.json.get('email')
-    password = request.json.get('password')
-    results = run_statement("CALL update_client (?,?,?,?,?)", [id, userName, firstName, email, password])
-    response = []
-    if (type(results) == list):
-        for client in results:
-            response.append(dict(zip(keys, client)))
-        return make_response(jsonify(results), 200)
-    else:
-        return make_response(jsonify(results), 403)
+        return make_response(jsonify(response), 500)

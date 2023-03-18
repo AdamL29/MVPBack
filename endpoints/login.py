@@ -14,7 +14,7 @@ def client_login():
     # creates random UUID
     email = request.json.get("email")
     password = request.json.get("password")
-    results = run_statement("CALL client_login (?,?,?)", [email, password, token])
+    results = run_statement("CALL user_login (?,?,?)", [email, password, token])
     if (type(results) == list):
         if results[0][0] == 1:
             return make_response(jsonify(results,"Login Successful!"), 200)
