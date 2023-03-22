@@ -5,9 +5,7 @@ from check import check
 
 @app.get('/api/pins')
 def get_pins():
-    pins = request.args.get()
-    keys = ["title", "bio", "created_at", "photo", "resource"]
-    # results = run_statement("CALL get_pins(?)", [pins?)
+    keys = ["title", "summary", "created_at", "photo", "resource"]
     results = run_statement("CALL get_pins")
     response = []
     if (type(results) == list):
