@@ -3,7 +3,7 @@ from flask import make_response, jsonify, request
 from dbhelpers import run_statement
 from check import check
 
-@app.get('/api/pins')
+@app.get('/pins')
 def get_pins():
     keys = ["title", "summary", "created_at", "photo", "resource"]
     results = run_statement("CALL get_pins")

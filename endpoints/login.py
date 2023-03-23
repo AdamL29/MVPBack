@@ -4,7 +4,7 @@ from dbhelpers import run_statement
 from check import check
 from uuid import uuid4
 
-@app.post('/api/client-login')
+@app.post('/client-login')
 def client_login():
     required = ['email', 'password']
     check_info = check(request.json, required)
