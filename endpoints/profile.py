@@ -3,7 +3,7 @@ from flask import make_response, jsonify, request
 from dbhelpers import run_statement
 from check import check
 
-@app.get('/user')
+@app.get('/api/user')
 def get_user():
     required = ['token']
     check_info = check(request.json, required)
@@ -20,7 +20,7 @@ def get_user():
     else:
         return make_response(jsonify(response), 403)
     
-@app.patch('/user')
+@app.patch('/api/user')
 def update_user():
     keys = ["username", "firstName", "email"]
     id = request.json.get('userId')

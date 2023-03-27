@@ -3,7 +3,7 @@ from flask import make_response, jsonify, request
 from dbhelpers import run_statement
 from check import check
 
-@app.post('/user')
+@app.post('/api/user')
 def add_user():
     keys = ["username", "firstName", "email", "password", "city", "bio", "profile_image"]
     userName = request.json.get('username')
